@@ -35,7 +35,7 @@ mode = True
 ix,iy = -1,-1
 b,g,r = (0,0,0)
 t = 1
-b3,g3,r3=(255,255,255)
+b3,g3,r3=(0,0,0)
 def nothing(x):
     pass
 cv.createTrackbar('R','image',0,255,nothing)
@@ -44,7 +44,7 @@ cv.createTrackbar('B','image',0,255,nothing)
 switch = 'Draw: 0 \n Canvas:1'
 cv.createTrackbar(switch,'image',0,1,nothing)
 cv.createTrackbar('T','image',1,500,nothing)
-cv.createTrackbar('M','image',0,5,nothing)
+cv.createTrackbar('M','image',0,6,nothing)
 def trackbar():
 	global b,g,r,t,b1,g1,r1,t1,b2,g2,r2,t2,b3,g3,r3,s,mode
 	s = cv.getTrackbarPos(switch,'image')
@@ -81,6 +81,8 @@ def draw_func(event,x,y,flags,param):
 			elif mode == 5:
 				radius =int(pow(((x-ix)**2+(y-iy)**2),0.5))
 				cv.circle(img,(x,y),radius,(b,g,r),t)
+			elif mode == 6 :
+				cv.circle(img,(x,y),t,(b3,g3,r3),-1)
 	elif event == cv.EVENT_LBUTTONUP:
 		drawing = False
 		if mode == 0:
@@ -97,6 +99,8 @@ def draw_func(event,x,y,flags,param):
 			cv.circle(img,(x,y),t,(b,g,r),-1)
 		elif mode == 5:
 			pass
+		elif mode == 6:
+			cv.circle(img,(x,y),t,(b3,g3,r3),-1)
 while(1):
 	cv.rectangle(img,(20,50),(1030,670),(153,241,25),1)
 	cv.putText(img,"JUST     DRAW     IT   MAN",(315,40),font,0.8,(255,0,0),1,cv.LINE_AA)
