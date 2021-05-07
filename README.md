@@ -1,2 +1,26 @@
+**requirements
+pyhton3 
+install some module
+pip install opencv-pyhton
+
 # drawingcanvasusingopencv
-so basically it is a drawing canvas which has 5 different modes like lines, circles, concentric circles, one more way of circles , rectangle, and pencil with a variety of thickness and you can change the colours as well...
+colors RGB (0-255)
+(0,0,0) - BLACK
+(255,255,255) - WHITE
+
+two basic transition
+0 - Draw
+1 - Canvas(color)
+when 0 is selected 
+7 different modes becomes active
+0 - rectangle
+1 - lines 
+2 - concentric circles
+3 - circles
+4 - paint brush
+5 - once centered multi circles
+6 - eraser (canvas color) // so make sure to change the canvas color
+
+there is a trackbar for thickness (works in every mode)
+
+follow the basic instruction in the output
