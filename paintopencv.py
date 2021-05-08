@@ -103,7 +103,7 @@ def draw_func(event,x,y,flags,param):
 			cv.circle(img,(x,y),t,(b3,g3,r3),-1)
 while(1):
 	cv.rectangle(img,(20,50),(1030,670),(153,241,25),1)
-	cv.putText(img,"JUST     DRAW     IT   MAN",(315,40),font,0.8,(255,0,0),1,cv.LINE_AA)
+	cv.putText(img,"JUST     DRAW     IT   ...",(315,40),font,0.8,(255,0,0),1,cv.LINE_AA)
 	cv.putText(img,"Press ESC to Get OUT",(20,700),font,1,(42,251,12),0,cv.LINE_AA)
 	cv.putText(img,"Press T for Tips",(20,40),font,1,(42,251,12),0,cv.LINE_AA)
 	cv.putText(img,"Press R to Reset",(710,40),font,1,(42,251,12),0,cv.LINE_AA)
