@@ -14,8 +14,6 @@ font = cv.FONT_HERSHEY_SIMPLEX
 #(b,g,r)
 while(1):
 	cv.imshow("image",img)
-	text = time.strftime("%Y/%m/%d %H:%M:%S %Z", time.localtime())
-	cv.putText(img,  text, (50,50),font, 0.7, (142,251,42), 1, cv.LINE_AA)
 	cv.putText(img,"Welcome Welcome",(200,350),font,2,(142,251,42),3,cv.LINE_AA)
 	cv.putText(img,"Press S to Start",(400,500),font,1,(42,251,142),1,cv.LINE_AA)
 	if cv.waitKey(1) & 0xFF == ord("s"):
@@ -23,8 +21,8 @@ while(1):
 		break
 while(1):
 	cv.imshow("image",img)
-	cv.putText(img,"You Have to draw any cool",(20,350),font,2,(142,251,42),1,cv.LINE_AA)
-	cv.putText(img,"shape, using Circle, Rectangle, Lines, Brush and more ",(50,400),font,1,(142,251,42),1,cv.LINE_AA)
+	cv.putText(img,"You have to draw something",(20,350),font,2,(142,251,42),1,cv.LINE_AA)
+	cv.putText(img,"using 8 different modes ",(50,400),font,1,(142,251,42),1,cv.LINE_AA)
 	cv.putText(img,"Press Space to Continue",(70,600),font,1,(42,251,142),1,cv.LINE_AA)
 	if cv.waitKey(1) & 0xFF == 32:
 		img = np.zeros((720,1048,3), np.uint8)*255
@@ -83,7 +81,7 @@ def trackbar():
 	elif s==2:
 		img1 = np.zeros((720,1048,3), np.uint8)*255
 		while(1):
-			cv.imshow("image",img1)
+			cv.imshow('image',img1)
 			cv.putText(img1,"TIPS",(20,100),font,2,(142,251,42),1,cv.LINE_AA)
 			cv.putText(img1,"1. First Change the Canvas Color and then draw on it",(50,150),font,1,(142,251,42),1,cv.LINE_AA)
 			cv.putText(img1,"2. Use canvas color brush in mode 6 to erase",(50,200),font,1,(142,251,42),1,cv.LINE_AA)
@@ -150,6 +148,7 @@ def draw_func(event,x,y,flags,param):
 			pass
 		elif mode == 7:
 			cv.circle(img,(x,y),t,(b3,g3,r3),-1)
+
 img = np.ones((720,1048,3),np.uint8)*255
 while(1):
 	cv.imshow("image",img)
@@ -161,8 +160,29 @@ while(1):
 	elif k == ord('s'):
 		n = random.randint(1,100)
 		n = str(n)
-		x = 'untitled'+n+'.jpg'
+		x = 'untitled'+n+'.png'
 		cv.imwrite(x,img)
+	elif k == ord('v'):
+			cap = cv.VideoCapture(0)
+			if not cap.isOpened():
+				print("Cannot open camera")
+				exit()
+			print(cap.get(cv.CAP_PROP_FRAME_WIDTH))
+			print(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
+			ret = cap.set(cv.CAP_PROP_FRAME_WIDTH,1280)
+			ret = cap.set(cv.CAP_PROP_FRAME_HEIGHT,720)
+			while True:
+				ret, frame = cap.read()
+				if not ret:
+					print("Can't receive frame (stream end?). Exiting ...")
+					break
+				gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+				cv.imshow('image',gray)
+				if cv.waitKey(1) == ord('q'):
+					break
+				trackbar()
+				cv.setMouseCallback("image", draw_func)
+			cap.release()
 	trackbar()
 	cv.setMouseCallback("image", draw_func)
 cv.destroyAllWindows()
